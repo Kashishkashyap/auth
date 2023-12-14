@@ -21,8 +21,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 app.get('/', async (req, res) => {
-    res.send("HEHE")
+    res.send("Welcome");
 })
 
 app.get('/makeuser', async (req, res) => {
@@ -53,7 +55,7 @@ app.post('/signup', async (req, res) => {
             password: hashedPassword,
         });
         await newUser.save();
-        res.send(newUser);
+        res.redirect('/');
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
